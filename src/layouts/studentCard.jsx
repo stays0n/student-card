@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { isLocalStorageDataLoaded } from './../utils/localStorage';
+
 import StudentInfo from './../components/studentInfo';
 
 const DATA_NAME = 'studentData';
