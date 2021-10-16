@@ -7,6 +7,7 @@ import {
 } from './../utils/localStorage';
 import { validator } from './../utils/validator';
 
+import FormModal from './../components/formModal';
 import InputTextfield from './../components/inputTextfield';
 
 const initialState = {
@@ -27,6 +28,10 @@ const StudentForm = () => {
     const { name, value } = e.target;
     setData((prevState) => ({ ...prevState, [name]: value }));
   };
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const validatorConfig = {
     name: {
@@ -94,50 +99,57 @@ const StudentForm = () => {
   };
 
   return (
-    <div className='container-sm'>
-      <h1 className='display-1'>
-        {isLocalStorageDataLoaded(DATA_NAME) ? 'Редактировать' : 'Создать'}
-      </h1>
-      <div className='row'>
-        <form onSubmit={handleSubmit}>
-          <InputTextfield
-            label='Имя'
-            name='name'
-            value={data.name}
-            onDataChange={handleDataChange}
-            error={errors.name}
-          />
-          <InputTextfield
-            label='Фамилия'
-            name='surname'
-            value={data.surname}
-            onDataChange={handleDataChange}
-            error={errors.surname}
-          />
-          <InputTextfield
-            label='Год рождения'
-            type='number'
-            name='birthyear'
-            value={data.birthyear}
-            onDataChange={handleDataChange}
-            error={errors.birthyear}
-          />
-          <InputTextfield
-            label='Портфолио'
-            name='portfolio'
-            value={data.portfolio}
-            onDataChange={handleDataChange}
-            error={errors.portfolio}
-          />
-          <Link className='btn btn-secondary me-2' to='/'>
-            Назад
-          </Link>
-          <button className='btn btn-primary' type='submit' disabled={!isValid}>
-            {isLocalStorageDataLoaded(DATA_NAME) ? 'Обновить' : 'Создать'}
-          </button>
-        </form>
+    <React.Fragment>
+      <div className='container-sm'>
+        <h1 className='display-1'>
+          {isLocalStorageDataLoaded(DATA_NAME) ? 'Редактировать' : 'Создать'}
+        </h1>
+        <div className='row'>
+          <form onSubmit={handleSubmit}>
+            <InputTextfield
+              label='Имя'
+              name='name'
+              value={data.name}
+              onDataChange={handleDataChange}
+              error={errors.name}
+            />
+            <InputTextfield
+              label='Фамилия'
+              name='surname'
+              value={data.surname}
+              onDataChange={handleDataChange}
+              error={errors.surname}
+            />
+            <InputTextfield
+              label='Год рождения'
+              type='number'
+              name='birthyear'
+              value={data.birthyear}
+              onDataChange={handleDataChange}
+              error={errors.birthyear}
+            />
+            <InputTextfield
+              label='Портфолио'
+              name='portfolio'
+              value={data.portfolio}
+              onDataChange={handleDataChange}
+              error={errors.portfolio}
+            />
+            <Link className='btn btn-secondary me-2' to='/'>
+              Назад
+            </Link>
+            <button
+              className='btn btn-primary'
+              type='submit'
+              disabled={!isValid}
+              onClick={handleShow}>
+              {isLocalStorageDataLoaded(DATA_NAME) ? 'Обновить' : 'Создать'}
+            </button>
+          </form>
+        </div>
       </div>
-    </div>
+      <FormModal state={show} onClose={handleClose} />
+    </React.Fragment>
   );
 };
 

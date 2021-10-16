@@ -35,6 +35,7 @@ InputTextfield.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   onDataChange: PropTypes.func.isRequired,
+  error: PropTypes.string,
 };
 
 export default InputTextfield;

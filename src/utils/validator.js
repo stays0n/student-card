@@ -29,12 +29,12 @@ export function validator(data, config) {
       }
 
       case 'max': {
-        statusValidate = Number(data) > config.value;
+        statusValidate = +data > config.value;
         break;
       }
 
       case 'min': {
-        statusValidate = Number(data) < config.value;
+        statusValidate = +data < config.value;
         break;
       }
 
@@ -50,7 +50,7 @@ export function validator(data, config) {
     if (statusValidate) return config.message;
   }
   /**
-   * fieldName это email, password... в объекте data
+   * fieldName это name, surname, birthyear, portfolio... в объекте data
    */
   for (const fieldName in data) {
     /**
